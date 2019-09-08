@@ -15,10 +15,10 @@
     </div>
     
     <section id="categories-content" class="last categories-content">
-        <div class="container">
+        <div class="container custom">
             <div class="row">
                 <!-- SIDEBAR CATEGORIES -->
-                <div class="col-md-3">
+                <div class="col-md-3 col-custom">
                     <aside class="sidebar-categories">
                         <div class="inner">
                             
@@ -34,40 +34,6 @@
                             </div>
 
                             <!-- END / WIDGET TOP -->
-                            {{-- Rith --}}
-                            {{-- <div class="row" style="margin-right: 0px;">
-                                <div class="col-lg-12">
-                                    <div class="list-group">
-                                      <h5 class="list-group-item active">PREMIUM</h5>
-                                      @foreach ($postsPremium as $titlePremium)
-                                          <a href="{{url('')}}" class="list-group-item">{{$titlePremium->title}}</a>
-                                      @endforeach
-                                    </div>
-                                </div>
-                            </div> --}}
-                            {{-- <form method="POST" :action="'/author/lesson/'+lesson.id+'/attachment/upload'" class="form-inline" enctype="multipart/form-data">           				                    
-                                {{csrf_field()}}
-                                
-                                <div class="form-group pull-right">
-                                    
-                                    <input type="file" id="attachment" @change="fileSelected" name="attachment[]" multiple /><br />
-                                    <button type="submit" disabled class="btn btn-primary btn-xs attachment-submit-btn">
-                                        {{trans('strings.frontend.upload')}}
-                                    </button>
-                                    <a href="#" @click.prevent="showAddAttachment=false">
-                                        <i class="fa fa-times text-danger"></i> {{trans('strings.frontend.cancel')}}
-                                    </a>
-                                    <br />
-                                    <div class="help-block pull-right">
-                                        {{trans('strings.frontend.upload-msg')}}
-                                    </div>
-                                </div>
-                                
-                            </form> --}}
-                            <!-- Banner Add -->
-                            {{-- end Rith --}}
-
-
 
                             <div class="mc-banner">
                                 @if(config('demo.demo_mode'))

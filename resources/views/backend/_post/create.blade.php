@@ -16,8 +16,8 @@
     <div class="box box-success">
         <div class="box-body">
             
-            {{ Form::open(['route' => 'admin.pages.store', 'class' => 'form-horizontal', 'role' => 'form', 'method' => 'post']) }}
-
+            {{ Form::open(['route' => 'admin.pages.store', 'class' => 'form-horizontal', 'role' => 'form', 'method' => 'post','enctype'=>"multipart/form-data"]) }}
+                    {{ csrf_field() }}
                     <div class="box-body">
                         <div class="form-group">
                             {{ Form::label('title', trans('strings.backend.title'), ['class' => 'col-lg-2 control-label']) }}
@@ -89,7 +89,14 @@
                                 {{-- Form::textarea('body', null, ['class' => 'form-control', 'maxlength' => '191', 'required' => 'required', 'autofocus' => 'autofocus']) --}}
                             </div><!--col-lg-10-->
                         </div><!--form control-->
-                        
+                        {{-- rith  --}}
+                        <div class="form-group">
+                            <label for="thumnail" class="col-lg-2 control-label">Image Thumnail</label>
+                               <div class="col-lg-10">
+                                    <input type="file" id="exampleInputFile" name="file">
+                               </div>
+                       </div>
+                        {{-- end rith --}}
                         <div class="form-group">
                             {{ Form::label('published', trans('strings.backend.published'), ['class' => 'col-lg-2 control-label']) }}
                             <div class="col-lg-1">

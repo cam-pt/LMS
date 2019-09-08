@@ -26,7 +26,7 @@
                         <div class="inner">
                             
                             <!-- WIDGET TOP -->
-                         
+                            
                             <div class="widget">
                                 <ul class="list-style-block">
                                     <strong>Recommended Posts</strong>

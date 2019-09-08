@@ -6,6 +6,8 @@ use App\Models\Blog as Post;
 use App\Models\BlogCategory as Category;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\File;
 
 class AdminBlogController extends Controller
 {
@@ -91,7 +93,6 @@ class AdminBlogController extends Controller
     
     public function store(Request $request)
     {
- 
         $this->validate($request, [
             'title' => 'required|unique:blogs,title',
             'slug' => 'required|unique_with:blogs,lang',
@@ -99,8 +100,14 @@ class AdminBlogController extends Controller
             'lang'  => 'required',
             'type'  => 'required',
             'blogType'  => 'required',
-            'blog_category_id' => 'required'
+            'blog_category_id' => 'required',
+            'file'  => 'required'
         ]);
+        if ($request->file)
+        {
+            $path =$request->file('file')->store('thumbnail');
+        }
+        
         $post = new Post();
         $post->title = $request->title;
         $post->lang = $request->lang;
@@ -108,6 +115,7 @@ class AdminBlogController extends Controller
         $post->body = $request->body;
         $post->type = $request->type;
         $post->blog_type = $request->blogType;
+        $post->thumnail = $path;
         $post->display_main_menu = $request->display_main_menu ? true : false;
         $post->display_footer = $request->display_footer ? true : false;
         $post->featured_frontend = $request->featured_frontend ? true : false;

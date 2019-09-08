@@ -40,7 +40,8 @@ class BlogController extends Controller
                 ->where('type', 'article');
         })->get();
         // dd($posts->toArray());
-        return view('frontend._blog.index', compact('posts', 'postCategories'));
+        $dataPrem =Blog::select('title','thumnail','id')->orderBy('id','desc')->where('blog_type',1)->paginate(6);
+        return view('frontend._blog.index', compact('posts','dataPrem','postCategories'));
 
     }
     
