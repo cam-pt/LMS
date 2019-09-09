@@ -93,7 +93,11 @@
                         <div class="form-group">
                             <label for="thumnail" class="col-lg-2 control-label">Image Thumnail</label>
                                <div class="col-lg-10">
-                                    <input type="file" id="exampleInputFile" name="file">
+                                    <div class="mail-img-preview">
+                                        <button id="remove" class="btn-remove-image" onclick="defaultImage();">X</button>
+                                        <img id="image-preview" width="100%" src="" alt="your image" />
+                                    </div>
+                                    <input type="file" id="file-thumbnail" name="file" style="display: none">
                                </div>
                        </div>
                         {{-- end rith --}}
@@ -208,6 +212,30 @@
           }
           return text;
         }
+
+        $(document).ready(function(){
+            defaultImage();
+            $('#image-preview').click(function(){
+                $("#file-thumbnail").click();
+            });
+        });
+        function defaultImage(){
+                $("#remove").css("display","none");
+                $("#image-preview").attr("src",'/storage/thumbnail/image_default.jpg');
+            }
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    $('#image-preview').attr('src', e.target.result);
+                }
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+        $("#file-thumbnail").change(function () {
+            $("#remove").css("display","");
+            readURL(this);
+        });
     </script>
     
 @endsection
