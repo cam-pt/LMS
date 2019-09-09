@@ -94,7 +94,7 @@
                             <label for="thumnail" class="col-lg-2 control-label">Image Thumnail</label>
                                <div class="col-lg-10">
                                     <div class="mail-img-preview">
-                                        <button id="remove" class="btn-remove-image" onclick="defaultImage();">X</button>
+                                        <button type="button"  id="remove" class="btn-remove-image" onclick="defaultImage();">X</button>
                                         <img id="image-preview" width="100%" src="" alt="your image" />
                                     </div>
                                     <input type="file" id="file-thumbnail" name="file" style="display: none">
