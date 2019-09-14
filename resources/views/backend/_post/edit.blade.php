@@ -88,7 +88,19 @@
                                 {{-- Form::textarea('body', null, ['class' => 'form-control', 'maxlength' => '191', 'required' => 'required', 'autofocus' => 'autofocus']) --}}
                             </div><!--col-lg-10-->
                         </div><!--form control-->
-                        
+                        {{-- rith  --}}
+                        <div class="form-group">
+                            <label for="thumnail" class="col-lg-2 control-label">Image Thumnail</label>
+                               <div class="col-lg-10">
+                                    <div class="mail-img-preview">
+                                        <button type="button"  id="remove" class="btn-remove-image" onclick="defaultImage();">X</button>
+                                        <img id="image-preview" width="100%" src="/storage/{{ $post->thumnail }}" alt="your image" />
+                                    </div>
+                                    <input type="file" id="file-thumbnail" name="image" style="display: none" value="{{ $post->thumnail}}">
+                                    <input type="text" name="image_old" style="display: none" value="{{ $post->thumnail}}">
+                               </div>
+                       </div>
+                        {{-- end rith --}}
                         <div class="form-group">
                             {{ Form::label('published', trans('strings.backend.published'), ['class' => 'col-lg-2 control-label']) }}
                             <div class="col-lg-1">
@@ -146,14 +158,14 @@
             
         };
         
-        // var config = {
-    	// 	codeSnippet_theme: 'Monokai',
-    	// 	language: '{{ config('app.locale') }}',
-    	// 	height: 300,
-    	// 	filebrowserImageBrowseUrl: '/filemanager?type=Images',
-        //     filebrowserImageUploadUrl: '/filemanager/upload?type=Images&_token=',
-        //     filebrowserBrowseUrl: '/filemanager?type=Files',
-        //     filebrowserUploadUrl: '/filemanager/upload?type=Files&_token=',
+        var config = {
+    	codeSnippet_theme: 'Monokai',
+    	language: '{{ config('app.locale') }}',
+    	height: 300,
+    	filebrowserImageBrowseUrl: '/filemanager?type=Images',
+        filebrowserImageUploadUrl: '/filemanager/upload?type=Images&_token=',
+        filebrowserBrowseUrl: '/filemanager?type=Files',
+        filebrowserUploadUrl: '/filemanager/upload?type=Files&_token=',
     	// 	toolbarGroups: [
     	// 		{ name: 'clipboard',   groups: [ 'clipboard', 'undo' ] },
     	// 		{ name: 'editing',     groups: [ 'find', 'selection', 'spellchecker' ] },
@@ -169,9 +181,9 @@
     	// 		{ name: 'styles' },
     	// 		{ name: 'colors' }
     	// 	]
-    	// };  
-    	// config.extraPlugins = 'html5video,widget,widgetselection,clipboard,lineutils';
-        CKEDITOR.replace('my-editor');
+    	};  
+    	config.extraPlugins = 'html5video,widget,widgetselection,clipboard,lineutils';
+        CKEDITOR.replace('my-editor',config);
         
         $('.language').on('change', function(){
             $('.flag').attr('src', '/images/flags/'+$('.language').val()+'.svg');
@@ -195,6 +207,29 @@
           }
           return text;
         }
+
+        $(document).ready(function(){
+            $('#image-preview').click(function(){
+                $("#file-thumbnail").click();
+            });
+        });
+        function defaultImage(){
+                $("#remove").css("display","none");
+                $("#image-preview").attr("src",'/storage/thumbnail/image_default.jpg');
+            }
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    $('#image-preview').attr('src', e.target.result);
+                }
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+        $("#file-thumbnail").change(function () {
+            readURL(this);
+            $("#remove").css("display","");
+        });
     </script>
     
 @endsection
